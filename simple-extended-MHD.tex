@@ -1,0 +1,848 @@
+\documentclass[preprint,1p]{elsarticle}
+% \documentclass{elsarticle}
+% \documentclass{article}
+% \documentclass[review,leqno]{siamart1116}
+%\documentclass[review,onefignum,onetabnum]{siamart190516} 
+
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+\usepackage{xspace}
+\usepackage{multirow}
+% \usepackage{bbm}
+\usepackage{mathbbol}
+% mathbbol
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% \usepackage[numbers]{natbib}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{enumitem}
+
+% \setlist{leftmargin=23pt}
+% \setlist{labelsep=0mm}
+% \setlist{rightmargin}
+% \setlist{listparindent=-10pt}
+% \setlist{labelwidth=10pt}
+% \setlist{itemindent=0pt}
+
+\setlist{topsep=12pt}
+% \setlist{partopsep}
+% \setlist{parsep=0pt}
+\setlist{itemsep=-3pt}
+
+
+
+
+
+
+
+
+
+
+
+%\usepackage{float}
+% \newsiamthm{example}{Example}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+
+\usepackage{accents}
+
+\usepackage{Macros/macros}
+
+% Indentation control
+\setlength{\parindent}{10pt}
+
+% Space between paragraphs.
+% \setlength{\parskip}{-3pt}
+
+%====================To be removed============================
+% \usepackage[notref,notcite]{showkeys} % To see crossreferences.
+% \usepackage[notref]{showkeys} % To see crossreferences.
+\newcommand{\murtazo}[1]{\textcolor{blue}{#1}}
+\newcommand{\mn}[1]{{\leavevmode\color{red}Murtazo: #1}}
+\newcommand{\rf}[1]{{\leavevmode\color{orange}Rafa: #1}}
+\usepackage[colorinlistoftodos]{todonotes}
+%====================To be removed============================
+
+\begin{document}
+
+\begin{frontmatter}
+\title{A structure-preserving scheme for an extended MHD model}
+%   \tnotetext[t1]{This research is funded by Swedish Research Council (VR)
+%   under grant number 2021-04620.}
+  \author[1]{Murtazo Nazarov}
+  \ead{murtazo.nazarov@it.uu.se}
+  \author[1]{Rafael Rodriguez-Velasco}
+  \ead{rafael.rodriguez-velasco@it.uu.se}
+  \author[2]{Ignacio Tomas}
+  \ead{igtomas@ttu.edu}
+  \author[3,4]{John Shadid}
+  \ead{jnshadi@sandia.gov}
+  \author[3]{Michael M. Crockatt}
+  \ead{mmcrock@sandia.gov}
+  \address[1]{Department of Information Technology, Uppsala University, Sweden}
+  \address[2]{Department of Mathematics \& Statistics Texas Tech University}
+  \address[3]{Sandia National Laboratories, P.O. Box 5800, MS 1320,
+              Albuquerque, NM 87185, USA}
+  \address[4]{Department of Mathematics and Statistics, University of New
+  Mexico, MSC01 1115, Albuquerque, NM 87131, United States}
+\begin{abstract}
+
+% We extend a previously developed structure-preserving method for the
+% compressible ideal Magnetohydrodynamics (MHD) equations to the Hall resistive
+% MHD model. The formulation is presented in a non-divergence formulation of the
+% model, consisting of a compressible Euler’s equation solver and a
+% momentum-magnetic source system with a mechanical energy update. The magnetic
+% field is discretized in a curl-conforming finite element space, ensuring the
+% involution constraint. The scheme preserves positivity of density, internal
+% energy, conservation of total energy, and the minimum principle for specific
+% entropy. We assess the accuracy of the method using whistler waves and
+% present reference computations of the GEM Magnetic Reconnection Challenge and
+% Orszag--Tang vortex. The method uses residual-based resistivity,
+% which allows us to show stability of the scheme across various mesh configurations
+% while preserving the qualitative dynamics and reconnection rates.
+% The resulting method provides a robust and consistent structure-preserving
+% framework for Hall MHD.
+Blah.
+\end{abstract}
+
+\begin{keyword}
+extended MHD \sep
+structure preserving \sep
+energy-stability \sep
+invariant domain \sep
+involution constraint
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}\label{sec:intro}
+
+In this work we will consider the numerical solution of the
+extended-MHD model:
+\begin{subequations}
+\label{ExtMHD}
+% \left\{
+\begin{align}
+\label{ExtMHDmass}
+\tfrac{\partial \rho}{\partial t} + \diver{}\mom &= 0 \\
+%
+\label{ExtMHDmom}
+\tfrac{\partial \mom}{\partial t} + \diver{}
+\big( \rho^{-1} \mom\mom^\transp
++ \mathbb{I} (p_i + p_e) \big)
+&=
+\mu \current \times \Hfield \\
+%
+\label{ExtMHDTotme}
+\tfrac{\partial \totme}{\partial t} + \diver{}\big( \tfrac{\mom}{\rho} (\totme +
+p_i + p_e) \big)
+&= \Efield \cdot\current \\
+%
+%
+\label{ExtMHDJ}
+\begin{split}
+\mu \tfrac{\partial \current}{\partial t}
+&= \tfrac{\mu}{d_e^2} \rho( \Efield + \tfrac{\mom}{\rho} \times \Hfield) \\
+%
+& \ \ \ - \tfrac{\mu d_i}{d_e^2} \current \times \Hfield
+- \tfrac{\mu}{d_e^2} \rho \resist \current
+\end{split} \\
+%
+\label{ExtMHDmagneto}
+\current &= \curl{}\Hfield    \, , \\
+%
+\label{ExtMHDHfield}
+\mu \partial_t \Hfield  &= - \curl{}\Efield .
+\end{align}
+% \right.
+\end{subequations}
+where $\rho$ is the density, $\mom$ is the momentum, $\mathbb{I} \in
+\mathbb{R}^{3 \times 3}$ is the identity matrix, $\totme$ is the total
+mechanical energy, and $\Hfield$ is the magnetic field. Here the constant
+$\resist > 0$ is the resistivity while
+\begin{align}
+\label{dediDef}
+d_e^2 := - \tfrac{m_e m_i}{q_e q_i} > 0
+  \ \ \text{and} \ \
+d_i := \big(\tfrac{m_e}{q_e} + \tfrac{m_i}{q_i}\big) > 0
+\end{align}
+where $m_e > 0 $ is the specific electron mass, $q_e < 0 $ is the specific
+electron charge, $m_i > 0 $ is the specific ion mass, $q_i > 0$ is the
+specific ion charge, see for instance \cite[p. 90]{Krall1974}. The term
+$\curl{}\Hfield \times \Hfield$ in the right hand side of \eqref{ExtMHDJ}
+is the Hall term, while the term $\rho \resist \curl{}\Hfield$ is the
+resistive term. Equation \eqref{ExtMHDmass} represents the conservation of
+mass, \eqref{ExtMHDmom} is the balance of momentum, \eqref{ExtMHDTotme} is the
+balance of mechanical energy, \eqref{ExtMHDJ} is commonly refereed as
+generalized Ohm's law,  \eqref{ExtMHDmagneto} is the magnetostatic
+condition\footnote{The magnetostatic condition is formally obtained as the
+infinite speed of light of the Ampere's equation $\epsilon \partial_t \Efield -
+\curl{}\Hfield = - \current$}, and \eqref{ExtMHDHfield} is the induction
+equation (Faraday's law).
+
+\begin{remark}[Ohm's law does not imply an involution]\label{Rem:NoInvolution}
+Let $\boldsymbol{w}$ and $\boldsymbol{z}$ two vector fields such that
+$\partial_t \boldsymbol{w} + \curl{}\boldsymbol{z} = 0$, we say that
+$\boldsymbol{w}$ satisfies an divergence involution law. By this we mean that,
+the evolution for $\boldsymbol{w}$ automatically implies time invariance of the
+divergence. More precisely, taking the divergence to both sides of $\partial_t
+\boldsymbol{w} + \curl{}\boldsymbol{z} = 0$ we obtain
+\begin{align*}
+\partial_t \diver{}\boldsymbol{w}
++ \diver{}\curl{}\boldsymbol{z} = \partial_t \diver{}\boldsymbol{w} = 0 \ \
+\Rightarrow  \ \ \partial_t \diver{}\boldsymbol{w} = 0
+\end{align*}
+In other words, the divergence of $\boldsymbol{w}$ does not evolve in time.
+Therefore, if the initial value of the divergence is zero, then it is zero for
+all time. For instance, we say that the $\Hfield$ automatically satisfies an
+involution since its evolution law is given by \eqref{ExtMHDHfield}.
+
+On the other hand, we note that the right hand side of \eqref{ExtMHDJ}
+cannot be written as a curl of some other field. In other words: Ohm's law
+\eqref{ExtMHDJ} neither implies nor guarantees a divergence involution of the
+current $\current$. To the best of our knowledge there: are no mathematically
+nor physically meaningful arguments to claim that Ohm leads to a divergence free
+condition of the current. This is a well-known issue discussed in several
+references. However, it is still true that $\diver{}\current = 0$ in the
+context of model \eqref{ExtMHD}. But epistemically, it is important to
+understand why. In simple terms, the condition $\diver{}\current = 0$ is true
+because the of the magnetostatic condition \eqref{ExtMHDmagneto}.
+
+
+% More specifically:
+% equation \eqref{ExtMHDJ} neither guarantees nor implies the condition
+% $\diver{}\current = 0$.
+
+
+
+% divergence
+% free condition $\diver{}\boldsymbol{w}$. In more pedantic terms: the fact that
+% $\partial_t
+% \boldsymbol{w}$ is exactly equal to the $\curl{}$ of some other vector field
+% implies a di
+
+% arbitrary vector field $\boldsymbol{w}$ satisfying an
+% evolution law of the form
+% $\partial_t \boldsymbol{w} + \curl{}\boldsymbol{z} = 0$, where $\boldsymbol{z}$
+% may be another given vector field
+\end{remark}
+
+% \section{Putting the current work in context}
+%
+% It is impossible to describe the current landscape of MHD models
+% and their derivation. Indeed some aspects of their derivation are still
+% controversial. But it is pedagogical to revisit the assumptions and
+% the intended effect behind such assumption:
+% \begin{itemize}
+% \item[-] \textit{Quasi-neutrality. }The first and most important assumption of
+% MHD modeling is quasi-neutrality. I wouldn't be exaggerated to say
+% that \emph{quasi-neutrality assumption} and \emph{MHD-assumption} are
+% colloquially used as exchangeable synonyms of each other. Quasi-neutrality is
+% the foundational tenet that defines what is an MHD model and what is not.
+% Quasi-neutrality does not imply the lack of electric currents: it implies the
+% absence of electric charge separation. Perhaps, the most important consequence
+% of quasi-neutrality is the divergence free condition $\diver{}\current = 0$. The
+% original (historical) motivations to introduce the quasi-neutrality assumption
+% was the removal of displacement currents and high-frequency electrostatic
+% plasma-oscillations from the model. This makes MHD models (a.k.a.
+% quasi-neutral models) more tractable than fully-electrodynamic two-fluid
+% models.
+% %
+% \item[-] \textit{Infinite speed of light vs finite speed of light.} Not all
+% extended MHD models use infinite speed of light in the current literature
+% landscape. MhD models assuming infinite speed of light necessarily use the
+% magnetostatic condition \eqref{ExtMHDmagneto} by construction. On the other
+% hand, quasi-neutral models that assume finite speed of light use the whole
+% Ampere's equation $\epsilon \partial_t \Efield - \curl{}\Hfield = - \current$.
+% The primary motivation to re-introduce the $\epsilon > 0$ parameter is making
+% $\Efield$ an evolutionary variable. This enables the re-use of many
+% shock-hydrodynamics numerical schemes and code-bases. In addition, this also
+% helps in avoiding global linear/nonlinear solvers. The value of $\epsilon$ used
+% in practice is different from the electric permittivity of vacuum. More
+% precisely we have that in practice $\epsilon > > \epsilon_0$. Or
+% equivalently: in the context of quasi-neutral models $\epsilon > 0$ is a purely
+% numerical device that allows to improve the computational capabilities of the
+% model. Computing a transient electric field is much easier that computing  a
+% quasi-static electric field that requires the solution of global linear systems.
+%
+% % In some cases the user might consider using the actually
+% % physical value of the speed of light, but most frequently the speed of light
+% % takes a purely artificial value.
+% %
+% \item[-] \textit{Self-consistent vs non-self-consistent models}. An MHD model
+% is said to be self-consistent if $\diver{}\current = 0$ holds true by
+% construction. Models that use the magnetostatic condition are self-consistent by
+% default since \eqref{ExtMHDmagneto} implies:
+% \begin{align*}
+% \diver{}\current = \diver{}\curl{}\Hfield = 0
+% \end{align*}
+% On the other hand MHD models using a full Ampere's equation $\epsilon
+% \partial_t \Efield - \curl{}\Hfield = 0$ are not self-consistent since Ohm's
+% law does not (in general) imply and an divergence involution for
+% $\current$, see Remark \ref{Rem:NoInvolution} for more details. Again, we
+% highlight that this is a fairly well-known problem.
+% %
+% % For the very
+% % specific case of the Ohm's law \eqref{ExtMHDJ} that would imply the condition:
+% % \begin{align*}
+% % \tfrac{1}{d_e^2} \rho( \Efield + \tfrac{\mom}{\rho} \times \Hfield)
+% % - \tfrac{d_i}{d_e^2} \current \times \Hfield
+% % - \tfrac{1}{d_e^2} \rho \resist \current
+% % \end{align*}
+% % which is a far-fetched request based on no concrete mathematical or physical
+% % argument.
+% %
+% \item[-] \textit{Positive electron mass vs zero electron mass limit.} The most
+% complete version of Ohm's law is given by:
+% \begin{align*}
+% bklaha.k
+% \end{align*}
+%
+%
+%
+%
+%
+% Even for
+% the lightest atomic species, which is hydrogen, we have that $m_i \approx
+% 1836 m_e$. For higher atomic species (namely other gases or even metals in
+% gaseous state) the ratio of ion mass to electron mass is even higher. It is
+% a fair claim that the electron mass is negligible in comparison to ion mass.
+% Then again, the family of quasi-neutral models available in the literature is
+% divided in two: models that assume $m_e\rightarrow 0^+$, and models that
+% consider $m_e > 0$.
+% Ideal MHD and Resisitive-Hall-MHD assume $m_e = 0$. We often say that models
+% that assume that assume zero electron mass are models that neglect all
+% \emph{electron inertia effects}. On the other hand, models that assume $m_e >
+% 0$ correspond with the family of quasi-neutral models often called
+% \emph{extended} MHD models\footnote{We highlight that the terminology
+% ``extended'' MHD model might have other uses in the literature.}
+%
+%
+% % If we consider
+% % the effect of taking the limit $m_e\rightarrow 0^+$ and then we obtain:
+% % \begin{align*}
+% % d_e^2 \rightarrow 0^+ \ \ \text{and} \
+% % d_i \rightarrow \tfrac{m_i}{q_i}
+% % \end{align*}
+%
+%
+%
+% % Applying these limit to Ohm's law \eqref{ExtMHDJ} we obtain.
+% % \label{ExtMHDJ}
+% % \begin{split}
+% % \mu \tfrac{\partial \current}{\partial t}
+% % &= \tfrac{\mu}{d_e^2} \rho( \Efield + \tfrac{\mom}{\rho} \times \Hfield) \\
+% % %
+% % & \ \ \ - \tfrac{\mu d_i}{d_e^2} \current \times \Hfield
+% % - \tfrac{\mu}{d_e^2} \rho \resist \current
+% % \end{split} \\
+% \end{itemize}
+%
+%
+% % There is a big point of departure in the MHD literature:
+% % \textit{(i)}
+% % models that assume infinite speed of light, therefore the magnetostatic
+% % condition \eqref{ExtMHDmagneto} holds, and models that assume finite speed of
+% % light, therefore
+%
+% % In this sense, model \eqref{ExtMHD} is self-consistent because the
+% % magnetostatic condition \eqref{ExtMHDmagneto} holds. This model is similar to
+% % the electrodynamic model appearing in \cite{Seyler2018}. The main difference is
+% % that in \eqref{ExtMHD} we consider the infinite speed of light limit $c
+% % \rightarrow \infty$ (equivalently $\epsilon \rightarrow 0$) leading to the
+% % magnetostatic equation. This difference is subtle but carries a fundamental
+% % difference: model \eqref{ExtMHD} is self-consistent, while model
+% % \cite{Seyler2018} is not.
+%
+% % We note that since
+% % $\tfrac{\partial
+% % \current}{\partial t} \not= 0$, this model
+% % includes electron kinetic effects. Therefore, the total kinetic energy is given
+% % by $\tfrac{1}{2\rho}|\mom|^2 + d_e^2 \tfrac{1}{2}
+% % |\frac{\current}{\sqrt{\rho}}|^2$, see for instance \RED{*** cite someone ***}.
+%
+%
+%
+%
+%
+%
+%
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\section{Technical observation: electron
+inertia regularizes the electric field}\label{EliminationOfDJDt}
+
+
+
+
+
+
+
+This subsection is dedicated to show that model \eqref{ExtMHD} as induces a
+regularization of the electric field $\Efield$. More precisely, taking the curl
+of \eqref{ExtMHDHfield} we obtain:
+\begin{align}
+\label{CurlOfInduction}
+\mu \partial_t \current = - \curl{}^2 \Efield
+\end{align}
+Therefore, both \eqref{ExtMHDJ} and \eqref{CurlOfInduction} provide an
+evolution law for $\mu \partial_t \current$. Then if that's true, we can equate
+$- \curl{}^2 \Efield$ with the right hand side of $\eqref{ExtMHDJ}$ to obtain
+(after some reorganization):
+\begin{align*}
+\rho \Efield + \big(\tfrac{d_e^2}{\mu}\big) \curl{}^2 \Efield
+= \mu d_i \current \times \Hfield
++ \tfrac{\rho}{\conduct} \current
+- \mu \mom \times \Hfield
+\end{align*}
+which is a quasi-static definition of the electric field. Therefore we may
+consider rewriting system \eqref{ExtMHD} as:
+\begin{align}
+\label{ExtMHDref00}
+\left\{
+\begin{aligned}
+\tfrac{\partial \rho}{\partial t} + \diver{}\mom &= 0 \\
+%
+\tfrac{\partial \mom}{\partial t} + \diver{}
+\big( \rho^{-1} \mom\mom^\transp
++ \mathbb{I} (p_i + p_e) \big)
+&=
+\mu \curl{}\Hfield \times \Hfield \\
+%
+\tfrac{\partial \totme}{\partial t} + \diver{}\big( \tfrac{\mom}{\rho} (\totme +
+p_i + p_e) \big)
+&=
+\Efield \cdot\current \\
+%
+%
+\rho \Efield + \big(\tfrac{d_e^2}{\mu}\big) \curl{}^2 \Efield
+&= \mu d_i \curl{}\Hfield \times \Hfield
++ \tfrac{\rho}{\conduct} \curl{}\Hfield
+- \mu \mom \times \Hfield \\
+%
+\mu \partial_t \Hfield  &= - \curl{}\Efield .
+\end{aligned}
+\right.
+\end{align}
+where we have decided to make explicit use of the relationship
+\eqref{ExtMHDmagneto} to emphasize that the unknown fields are $\{\rho , \mom ,
+\totme , \Efield,\Hfield\}$ ($\current$ is not an unknown, it is a dependent
+field). We can make the description of model \eqref{ExtMHD} even more compact
+if we define the differential operator:
+\begin{align*}
+ \mathcal{L}_{\rho} = \rho \mathbb{I}
+ + \big(\tfrac{d_e^2}{\mu}\big) \curl{}^2
+\end{align*}
+where $\mathbb{I} \in \mathbb{R}^{3\times 3}$ is the identity operator.
+Similarly, we define its solution operator as $\mathcal{L}_{\rho}^{-1}$. We
+note that $\mathcal{L}_{\rho}^{-1}$ is a ``regularizing'' or ``smoothing
+operator''. We may write the electric field as:
+\begin{align}
+\label{ExtMHDEreg}
+\Efield = \mathcal{L}_{\rho}^{-1} (\mu d_i \curl{}\Hfield \times \Hfield
++ \tfrac{\rho}{\conduct} \curl{}\Hfield
+- \mu \mom \times \Hfield )
+\end{align}
+thereby, model \eqref{ExtMHD} can be written as:
+\begin{align}
+\label{ExtMHDref01}
+\left\{
+\begin{aligned}
+\tfrac{\partial \rho}{\partial t} + \diver{}\mom &= 0 \\
+%
+\tfrac{\partial \mom}{\partial t} + \diver{}
+\big( \rho \vel\vel^\transp
++ \mathbb{I} (p_i + p_e) \big)
+&=
+\mu \curl{}\Hfield \times \Hfield \\
+%
+\tfrac{\partial \totme}{\partial t} + \diver{}\big( \vel (\totme + p_i +
+p_e) \big)
+&= \mathcal{L}_{\rho}^{-1} (\mu d_i \curl{}\Hfield \times \Hfield
++ \tfrac{\rho}{\conduct} \curl{}\Hfield
+- \mu \mom \times \Hfield ) \cdot\current \\
+%
+\mu \partial_t \Hfield  &= - \curl{}\mathcal{L}_{\rho}^{-1} (\mu d_i
+\curl{}\Hfield \times \Hfield
++ \tfrac{\rho}{\conduct} \curl{}\Hfield
+- \mu \mom \times \Hfield ) .
+\end{aligned}
+\right.
+\end{align}
+In essence, \eqref{ExtMHDEreg} tells us that the electric field of
+model \eqref{ExtMHD} is a regularization of electric
+field considered in Hall-Resistive-MHD's model. Perhaps the key outtake is that
+the transient nature of the current equation \eqref{ExtMHDJ} induces a
+regularization of the electric field.
+
+We note that \eqref{ExtMHDref00} and \eqref{ExtMHDref01} are just two
+possible reformulations of model \eqref{ExtMHD}. However, at this point
+in time, it is not evident that \eqref{ExtMHDref00} and \eqref{ExtMHDref01}
+are good candidates for computational implementation. In the following section
+we propose a simple reformulation of model \eqref{ExtMHD} that leads to
+both a straightforward implementation and the preservation of critical
+properties in the continuous, semi-discrete as well as fully-discrete setting.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{A practical reformulation: eliminating the electric
+field and the current}\label{EliminationOfEfield}
+
+In this section we consider a second reformulation of model
+\eqref{ExtMHD} which consists in eliminating the electric field $\Efield$
+and the current $\current$. More precisely, we can eliminate the electric
+field from Ohm's law \eqref{ExtMHDJ} to obtain:
+\begin{align*}
+\Efield = d_e^2 \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t}
+- \mu \vel \times \Hfield
++ \tfrac{\mu d_i}{\rho} \current \times \Hfield
++ \tfrac{1}{\conduct} \current
+\end{align*}
+Inserting this expression into the right hand side of
+\eqref{ExtMHDTotme} and \eqref{ExtMHDHfield} and reorganizing the terms
+we obtain:
+\begin{align}
+\label{ExtMHDNoElec}
+\left\{
+\begin{aligned}
+\tfrac{\partial \rho}{\partial t} &= - \diver{}\mom \\
+%
+\tfrac{\partial \mom}{\partial t}
+&=
+- \diver{}
+\big( \rho \vel\vel^\transp
++ \mathbb{I} (p_i + p_e) \big)
++ \mu \current \times \Hfield \\
+%
+\tfrac{\partial \totme}{\partial t}
+- d_e^2 \tfrac{1}{\rho} \tfrac{\partial}{\partial t}\big(
+\tfrac{1}{2}|\current|^2\big)
+&=
+- \diver{}\big( \vel (\totme + p_i +
+p_e) \big)
+- \mu (\vel \times \Hfield) \cdot\current
++ \tfrac{1}{\conduct} |\current|^2  \\
+%
+\mu \partial_t \Hfield
++ d_e^2 \curl{}( \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t})
+&= \curl{}(\mu \vel \times \Hfield
+- \tfrac{\mu d_i}{\rho} \current \times \Hfield
+- \tfrac{1}{\conduct} \current) .
+\end{aligned}
+\right.
+\end{align}
+Similarly, we substitute $\current$ with the magnetostatic condition $\current =
+\curl{}\Hfield$. However, we will not make this substitution graphically
+evident at all occurrences. In order to obtain compact expressions we will
+stick to $\current$ when space is at a premium, and whenever the there is
+enough space we will fully express its meaning by substituting with
+$\curl{}\Hfield$. Therefore, we tacitly agree that there are only four
+unknown fields in $\{\rho, \mom, \totme, \Hfield\}$ in formulation
+\eqref{ExtMHDNoElec}. We consider the following splitting of the operator
+described by \eqref{ExtMHDNoElec}:
+\begin{align}
+\label{SeylerOp1}
+\text{Op \# 1:}
+\left\{
+\begin{aligned}
+\tfrac{\partial \rho}{\partial t} + \diver{}\mom &= 0 \\
+%
+\tfrac{\partial \mom}{\partial t} + \diver{}
+\big( \rho \vel\vel^\transp
++ \mathbb{I} (p_i + p_e) \big)
+&= 0  \\
+%
+\tfrac{\partial \totme}{\partial t}
+- d_e^2 \tfrac{1}{\rho} \tfrac{\partial}{\partial t}\big(
+\tfrac{1}{2}|\current|^2\big)
++ \diver{}\big( \vel (\totme + p_i +
+p_e) \big)
+&= \bzero \\
+%
+\mu \partial_t \Hfield
++ d_e^2 \curl{}( \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t})
+&= \bzero .
+\end{aligned}
+\right.
+\end{align}
+and
+\begin{align}
+\label{SeylerOp2}
+\text{Op \#2:}
+\left\{
+\begin{aligned}
+\tfrac{\partial \rho}{\partial t} &= 0 \\
+%
+\tfrac{\partial \mom}{\partial t} &=
+\mu \current \times \Hfield \\
+%
+\tfrac{\partial \totme}{\partial t}
+- d_e^2 \tfrac{1}{\rho} \tfrac{\partial}{\partial t}\big(
+\tfrac{1}{2}|\current|^2\big)
+&= - \mu (\vel \times \Hfield) \cdot\current
++ \tfrac{1}{\conduct} |\current|^2  \\
+%
+\mu \partial_t \Hfield
++ \curl{}(d_e^2 \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t})
+&= \curl{}(\mu \vel \times \Hfield
+- \tfrac{\mu d_i}{\rho} \current \times \Hfield
+- \tfrac{1}{\conduct} \current) .
+\end{aligned}
+\right.
+\end{align}
+Here Operator \#1 has to be re-written in a more compact fashion. We start with
+the following proposition that will allows us to simplify Operator \#1.
+
+\begin{proposition}\label{PropNoDtH} Assume that that $\rho(\xcoord) >
+0$ for all $\xcoord \in \domain$ and  $\Hfield \times \normal = 0$ on
+$\partial\domain$. Then, the condition
+\begin{align}
+\label{SplitConditionH}
+\mu \partial_t \Hfield
++ \curl{}(d_e^2 \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t})
+= \bzero \ \ \text{with} \ \ \current = \curl{}\Hfield
+\end{align}
+implies that $\partial_t \Hfield = 0$ and $\partial_t \current = 0$.
+\end{proposition}
+
+\begin{proof} We multiply \eqref{SplitConditionH} by $\partial_t \Hfield$ and
+integrate in space to obtain:
+\begin{align*}
+\int_{\domain} \mu |\partial_t \Hfield|^2
++ d_e^2 \tfrac{1}{\rho}
+|\partial_t\current |^2 \dx = 0 \, ,
+\end{align*}
+the conclusion follows readily.
+\end{proof}
+
+Therefore, from Proposition \ref{PropNoDtH}, we conclude that \eqref{SeylerOp1}
+is entirely equivalent to:
+\begin{align}
+% \label{SeylerOp1}
+\text{Op \# 1:}
+\left\{
+\begin{aligned}
+\tfrac{\partial \rho}{\partial t} + \diver{}\mom &= 0 \\
+%
+\tfrac{\partial \mom}{\partial t} + \diver{}
+\big( \rho \vel\vel^\transp
++ \mathbb{I} (p_i + p_e) \big)
+&= 0  \\
+%
+\tfrac{\partial \totme}{\partial t}
++ \diver{}\big( \vel (\totme + p_i +
+p_e) \big)
+&= \bzero \\
+%
+\partial_t \Hfield &= \bzero .
+\end{aligned}
+\right.
+\end{align}
+
+\begin{proposition}[Properties satisfied by Operator \#2] Assume that $\Hfield
+\times \normal = 0$ on the boundary $\partial\domain$. Then, the
+evolution of Operator \#2, as described in \eqref{SeylerOp2} satisfies the
+following properties:
+\begin{align}
+\label{SeylerOp2prop01}
+\tfrac{\partial}{\partial t}\int_{\domain} \tfrac{1}{2}\rho |\vel|^2
++ \tfrac{\mu}{2} |\Hfield|^2
++ d_e^2 \tfrac{1}{2\rho}|\curl{}\Hfield|^2 \dx
+%
+&= - \int_{\domain} \tfrac{1}{\conduct} |\curl{}\Hfield|^2  \dx \\
+%
+\label{SeylerOp2prop02}
+\tfrac{\partial }{\partial t} \big( \totme - \tfrac{1}{2}\rho
+|\vel|^2 - d_e^2 \tfrac{1}{\rho} \tfrac{1}{2}|\curl{}\Hfield|^2\big)
+&= \tfrac{1}{\conduct} |\curl{}\Hfield|^2 \ \ \text{for all }\xcoord \in \domain
+\end{align}
+Note that \eqref{SeylerOp2prop01} is a global property. However,
+\eqref{SeylerOp2prop02} is a purely local property: since it does not involve
+spatial gradients (e.g. divergence terms, convective terms, etc) it holds true
+in a pointwise sense.
+\end{proposition}
+
+\begin{proof} We start multiplying the equation for $\partial_t\Hfield$ in
+\eqref{SeylerOp2} by an arbitrary smooth test function $\Htest$ and integrate
+by parts to obtain:
+\begin{align*}
+&\int_{\domain}\mu \partial_t \Hfield \cdot \Htest
++ d_e^2 \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t}
+\cdot \curl{}\Htest \dx
++ \int_{\partial\domain}
+d_e^2 \tfrac{1}{\rho} \tfrac{\partial \current}{\partial t} \cdot
+(\Htest \times \normal) \ds \\
+%
+& \ \ \ = \int_{\domain} (\mu \vel \times  \Hfield
+- \tfrac{\mu d_i}{\rho} \current \times \Hfield
+- \tfrac{1}{\conduct} \current) \cdot \curl{}\Htest \dx \\
+%
+& \ \ \ + \int_{\partial\domain} (\mu \vel \times \Hfield
+- \tfrac{\mu d_i}{\rho} \current \times  \Hfield
+- \tfrac{1}{\conduct} \current) \cdot
+(\Htest \times \normal) \ds
+\end{align*}
+If we set $\Htest = \Hfield$ in the previous expression we obtain:
+\begin{align}
+\label{SeylerOp02formula01}
+\int_{\domain} \partial_t \big(\tfrac{\mu}{2} |\Hfield|^2\big)
++ d_e^2  \partial_t \big(\tfrac{1}{2\rho} |\curl{}\Hfield|^2 \big) \dx
+%
+= \int_{\domain} \mu (\vel \times  \Hfield)\cdot \current
+- \tfrac{1}{\conduct} |\current|^2  \dx .
+\end{align}
+On the other hand, multiplying the equation for $\partial_t\vel$ in
+\eqref{SeylerOp2} by $\vel$ and integrating in space we obtain:
+\begin{align*}
+\int_{\domain} \partial_t \big(\tfrac{1}{2}\rho |\vel|^2\big) \dx &=
+\int_{\domain} \mu (\current \times  \Hfield)\cdot\vel \dx \, ,
+\end{align*}
+adding this expression to \eqref{SeylerOp02formula01} then
+\eqref{SeylerOp2prop01} follows.
+\end{proof}
+
+\begin{corollary}[Conservation of total energy] Integrating
+\eqref{SeylerOp2prop02} in space:
+\begin{align*}
+\int_{\domain} \tfrac{\partial }{\partial t} \big( \totme - \tfrac{1}{2}\rho
+|\vel|^2 - d_e^2 \tfrac{1}{2\rho} |\curl{}\Hfield|^2\big) \dx
+&= \int_{\domain} \tfrac{1}{\conduct} |\curl{}\Hfield|^2 \dx
+\end{align*}
+adding this expression to \eqref{SeylerOp2prop01} we obtain:
+\begin{align*}
+\tfrac{\partial}{\partial t}\int_{\domain}
+\totme + \tfrac{\mu}{2} |\Hfield|^2 \dx
+%
+&= 0
+\end{align*}
+showing that the volution of Operator \#2, as described in \eqref{SeylerOp2},
+preserves the total energy.
+\end{corollary}
+
+From these results we propose the following scheme to solve Operator \#2:
+\begin{itemize}
+ \item[-] \textit{Step \#1.} Given the fields $\{\rho^n, \totme^{n},
+\vel^{n}, \Hfield^{n}\}$ solve the coupled system:
+\begin{align}
+\label{SeylerOp02Scheme}
+\left\{
+\begin{aligned}
+& \rho^n (\vel^{n+1} - \vel^{n}, \veltest) =
+\dt \mu (\current^{n+ \frac{1}{2}} \times \Hfield^{n+ \frac{1}{2}}, \veltest) \\
+%
+& \dt \mu (\Hfield^{n+1} - \Hfield^{n}, \Htest)
++ (d_e^2 \tfrac{1}{\rho} (\curl{}\Hfield^{n+1} - \curl{}\Hfield^{n}),
+\curl{}\Htest) \\
+%
+& \ \ \ = \dt (\mu \vel^{n+ \frac{1}{2}} \times \Hfield^{n+ \frac{1}{2}}
+- \tfrac{\mu d_i}{\rho} \current^{n+ \frac{1}{2}} \times \Hfield^{n+
+\frac{1}{2}}
+- \tfrac{1}{\conduct} \curl{}\Hfield^{n+ \frac{1}{2}} , \curl{}\Htest )
+\end{aligned}
+\right.
+\end{align}
+\item[-] \textit{Step \#2.} With $\vel^{n+1}$ and $\Hfield^{n+1}$, now at our
+disposal, we update the total mechanical energy as:
+\begin{align*}
+\totme^{n+1}
+&=
+\totme^{n}
++ \tfrac{1}{2}\rho |\vel^{n+1}|^2
+- \tfrac{1}{2}\rho |\vel^{n}|^2
++ d_e^2 \tfrac{1}{2}\big|\tfrac{\curl{}\Hfield^{n+1}}{\sqrt{\rho}}\big|^2
+- d_e^2 \tfrac{1}{2}\big|\tfrac{\curl{}\Hfield^{n}}{\sqrt{\rho}}\big|^2
++ \tfrac{\dt}{\conduct} |\current^{n+\frac{1}{2}}|^2
+\end{align*}
+ \item[-] \textit{Step \#3.} Return the updated solution
+$\{\rho^n, \totme^{n+1}, \vel^{n+1}, \Hfield^{n+1}\}$. Note that the density
+does not evolve during the evolution of Operator \#2 as described in
+\eqref{SeylerOp2prop02}.
+\end{itemize}
+
+\begin{remark}[Well-posedness of Operator \#1] We note that the discrete
+induction equation in \eqref{SeylerOp02Scheme} can reorganized as:
+\begin{align*}
+& \mu (\Hfield^{n+1}, \Htest)
++ ((\tfrac{d_e^2}{\rho} + \tfrac{\dt}{2 \conduct}) \curl{}\Hfield^{n+1},
+\curl{}\Htest) \\
+%
+& + \dt \tfrac{\mu d_i}{4} (\tfrac{1}{\rho}
+(\current^{n+1} \times \Hfield^{n+1} + \current^{n+1} \times \Hfield^{n}
++ \current^{n} \times \Hfield^{n+1}, \curl{}\Htest ) \\
+%
+& - \tfrac{\dt \mu}{4}(
+\vel^{n+1} \times \Hfield^{n+1} + \vel^{n+1} \times \Hfield^{n}
++ \vel^{n} \times \Hfield^{n+1}, \curl{}\Htest) \\
+%
+&= \mu (\Hfield^{n}, \Htest)
++ (d_e^2 \tfrac{1}{\rho} \curl{}\Hfield^{n}, \curl{}\Htest)
++ \tfrac{\dt \mu}{4}(\vel^{n} \times \Hfield^{n}, \curl{}\Htest) \\
+%
+&- \dt \tfrac{\mu d_i}{4} (\tfrac{1}{\rho} \current^{n} \times \Hfield^{n},
+\curl{}\Htest )
+%
+- \dt (\tfrac{1}{2 \conduct} \curl{}\Hfield^{n} , \curl{}\Htest ) \, ,
+\end{align*}
+Here the second row is related to the Hall term, while the third row is related
+to the usual $\vel \times \Hfield$ term occurring in ideal in MHD. The second
+row is very much benign since its spatial discretization scales like
+$\tfrac{1}{h}$. However, the second row containing the Hall terms
+scales like $\tfrac{1}{h^2}$. Those terms are lead to an extremely
+ill-conditioned Jacobian of the Newton iteration scheme, in particular when
+$\rho < < 1$. We note however that the symmetric diffusive term appearing at
+the end of the first row becomes very large whenever $\rho$ is very
+small, compensating the singular behaviour of the Hall term and creating (to
+some extent) a better conditioned system.
+\end{remark}
+
+
+\RED{*** Can we add the pressure terms to the current equation? ***} \\
+\RED{*** Can we add some form of convective terms that we neglected? ***} \\
+\RED{*** Can we add the JJ term in the momentum equation that we neglected?
+***} \\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{Macros/biblio}
+
+\end{document}
+
+
+

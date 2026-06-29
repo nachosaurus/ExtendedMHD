@@ -1,0 +1,201 @@
+\newtheorem{proof}{Proof}[section]
+
+% \newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+% \newtheorem{lemma}{Lemma}[section]
+\newtheorem{note}{Note}[section]
+% \theoremstyle{definition}
+\newtheorem{remark}{Remark}[section]
+% \newtheorem{definition}{Definition}[section]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sobolev kind-of-stuff and test functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\domain}{\Omega}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Differential operators
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\bv}[1]{\textit{\textbf{#1}}}
+\newcommand{\bv}[1]{\mathbf{#1}}
+%\newcommand{\bbv}[1]{\textbf{#1}}
+\newcommand{\diver}[1]{\text{div} \, \bv{#1}}
+\newcommand{\curl}[1]{\text{curl} \, \bv{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Geometric stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\bdry}{\partial\Omega}
+\newcommand{\normal}{\boldsymbol{n}}
+
+% \newcommand{\bulkint}[1]{\int_{\Omega}{#1} \, dx }
+\newcommand{\bulkint}[2]{\int_{#1}{#2} \, dx }
+% \newcommand{\bdryint}[1]{\int_{\partial\Omega}{#1} \, dS }
+\newcommand{\bdryint}[2]{\int_{#1} {#2} \, dS }
+\newcommand{\xcoord}{\boldsymbol{x}}
+
+\newcommand{\dx}{\, \mathrm{d}\boldsymbol{x}}
+\newcommand{\ds}{\, \mathrm{d}\boldsymbol{s}}
+
+\newcommand{\unit}{\boldsymbol{\mathsf{e}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Time and space discretization including limiting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\tstep}{n}
+\newcommand{\dt}{\tau}
+% \newcommand{\dt}{\Delta t}
+% \newcommand{\inc}{\updelta}
+\newcommand{\inc}{\delta}
+\newcommand{\tf}{t_F}
+
+\newcommand{\triangulation}{\mathcal{T}_h}
+\newcommand{\quadrule}{Q_h(K)}
+\newcommand{\quadrilateral}{\mathcal{Q}}
+\newcommand{\simplex}{\mathcal{P}}
+
+% \newcommand{\locglobmap}{\mathit{\mathbf{T} } }
+
+\newcommand{\element}{K}
+\newcommand{\face}{F}
+
+\newcommand{\locglobmap}{\boldsymbol{T}}
+
+\newcommand{\limiter}{\ell}
+
+\newcommand{\high}{\textrm{H}}
+\newcommand{\low}{\textrm{L}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Models/Modeling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\state}{\boldsymbol{u}}
+\newcommand{\totme}{E}
+\newcommand{\tote}{\mathcal{E}}
+\newcommand{\flux}{\boldsymbol{\mathbb{f}}}
+\newcommand{\entropy}{\eta}
+\newcommand{\eflux}{\boldsymbol{\mathbb{q}}}
+\newcommand{\inte}{\varepsilon}
+\newcommand{\specinte}{e}
+% \newcommand{\volE}{E}
+\newcommand{\dens}{\rho}
+\newcommand{\vel}{\boldsymbol{v}}
+\newcommand{\mom}{\boldsymbol{m}}
+\newcommand{\totale}{E}
+
+\newcommand{\mumag}{\mu}
+
+\newcommand{\Bfield}{\boldsymbol{\mathsf{B}}}
+\newcommand{\Hfield}{\boldsymbol{\mathsf{H}}}
+\newcommand{\Efield}{\boldsymbol{\mathsf{E}}}
+
+\newcommand{\force}{\boldsymbol{f}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Special parenthesis, divisors, brackets, etc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lp}{\bigl(}
+\newcommand{\rp}{\bigr)}
+\newcommand{\alp}{\left(}
+\newcommand{\arp}{\right)}
+
+\newcommand{\lb}{\left\lbrace}
+\newcommand{\rb}{\right\rbrace}
+
+% DG tools: this is for averages
+\newcommand{\avgl}{\left\lbrace \!\! \left\lbrace}
+\newcommand{\avgr}{\right\rbrace \!\! \right\rbrace}
+
+% this is for jumps
+\newcommand{\lj}{\left\llbracket}
+\newcommand{\rj}{\right\rrbracket}
+
+% this is for energy norms (triple bar)
+\newcommand{\LN}{\left\|}
+\newcommand{\RN}{\right\|}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\NCH}[1]{{\textcolor{Cyan}{#1}}}
+\newcommand{\RED}[1]{{\textcolor{red}{#1}}}
+\newcommand{\BLUE}[1]{{\textcolor{blue}{#1}}}
+\newcommand{\GREEN}[1]{{\textcolor{Green}{#1}}}
+\newcommand{\ORANGE}[1]{{\textcolor{Orange}{#1}}}
+\newcommand{\PLUM}[1]{{\textcolor{Plum}{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \newcommand{\thickdash}{\textbf{\textendash}}
+\newcommand{\thickdash}{$\boldsymbol{-}$}
+\newcommand{\transp}{\top}
+\newcommand{\cf}{cf.}
+% \newcommand{\itemizebullet}{$\circ$}
+\newcommand{\itemizebullet}{$\boldsymbol{\diamond}$}
+% \newcommand{\thickdash}{$\boldsymbol{-}$}
+% \newcommand{\itemizebullet}{$\blackdiamond$}
+% \newcommand{\itemizebullet}{$\blacksquare$}
+% \newcommand{\itemizebullet}{$\blacklozenge$}
+% this the name given to the polynomial order
+
+\newcommand{\bzero}{\boldsymbol{0}}
+
+% Here I define some variables
+\newcommand\ruleheight{0.0pt}
+\newcommand\rulethick{1.0pt}
+\newcommand\titlenewline{}
+\newcommand\myrule{
+\noindent \xrfill[\ruleheight]{\rulethick}}
+
+% Here common rule appears to be unable to do full text
+% width inside the itemize environment.
+\newcommand\commonrule{\noindent\xrfill[\ruleheight]{\rulethick}}
+\newcommand\fullwidthrule{\vspace{0pt} \hrule width \textwidth height 1.0pt
+\vspace{10pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Finite element spaces and discretization stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\FESpaceHypComp}{\mathbb{V}_h}
+\newcommand{\FESpaceH}{\pmb{\mathbb{H}}_h}
+\newcommand{\FESpaceHtangent}{\pmb{\mathbb{H}}_{h0}}
+
+\newcommand{\HypBasisComp}{\phi}
+\newcommand{\HBasis}{\boldsymbol{\varphi}}
+
+\newcommand{\HypVertices}{\mathcal{V}}
+\newcommand{\Hvertices}{\mathcal{V}_{\mathbb{H}}}
+
+\newcommand{\FESpacePot}{\mathbb{W}_h}
+\newcommand{\FESpacePotZero}{\mathbb{W}_{h0}}
+\newcommand{\EpotTest}{\omega}
+
+\newcommand{\veltest}{\boldsymbol{z}}
+\newcommand{\Htest}{\boldsymbol{\mathsf{X}}}
+
+\newcommand{\HfieldDOF}{\mathcal{H}}
+
+\newcommand{\resist}{r}
+\newcommand{\conduct}{\sigma}
+\newcommand{\collfreq}{\nu}
+\newcommand{\collfunct}{\omega}
+\newcommand{\current}{\boldsymbol{\mathsf{J}}}
+
+
+\newcommand{\Ltwo}{L^2(\domain)}
+
+\newcommand{\NewtonInc}{\Delta}
+
+\newcommand{\difff}{\mathrm{d}}

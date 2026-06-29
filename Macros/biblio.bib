@@ -1,0 +1,917 @@
+
+
+
+
+
+
+
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@article {Abgrall2014,
+    AUTHOR = {Abgrall, Remi and Kumar, Harish},
+     TITLE = {Robust finite volume schemes for two-fluid plasma equations},
+   JOURNAL = {J. Sci. Comput.},
+  FJOURNAL = {Journal of Scientific Computing},
+    VOLUME = {60},
+      YEAR = {2014},
+    NUMBER = {3},
+     PAGES = {584--611},
+      ISSN = {0885-7474,1573-7691},
+   MRCLASS = {65M08 (76X05)},
+  MRNUMBER = {3239800},
+MRREVIEWER = {Friedemann\ Kemm},
+}
+
+@article {Acherito2011,
+    AUTHOR = {Acheritogaray, Marion and Degond, Pierre and Frouvelle, Amic
+              and Liu, Jian-Guo},
+     TITLE = {Kinetic formulation and global existence for the
+              {H}all-{M}agneto-hydrodynamics system},
+   JOURNAL = {Kinet. Relat. Models},
+  FJOURNAL = {Kinetic and Related Models},
+    VOLUME = {4},
+      YEAR = {2011},
+    NUMBER = {4},
+     PAGES = {901--918},
+      ISSN = {1937-5093},
+   MRCLASS = {35Q35 (35A01 35D30 35K55 35L60 76W05)},
+  MRNUMBER = {2861579},
+MRREVIEWER = {Adrian Carabineanu},
+}
+
+@article {Arnold2008,
+    AUTHOR = {Arnold, Lukas and Dreher, J\"{u}rgen and Grauer, Rainer},
+     TITLE = {A semi-implicit {H}all-{MHD} solver using whistler wave
+              preconditioning},
+   JOURNAL = {Comput. Phys. Comm.},
+  FJOURNAL = {Computer Physics Communications. An International Journal and
+              Program Library for Computational Physics and Physical
+              Chemistry},
+    VOLUME = {178},
+      YEAR = {2008},
+    NUMBER = {8},
+     PAGES = {553--557},
+      ISSN = {0010-4655},
+   MRCLASS = {76W05 (65M06 65M12 76M22 76X05)},
+  MRNUMBER = {2672127},
+}
+
+@article{Arnold2014,
+  title={Periodic table of the finite elements},
+  author={Arnold, Douglas N and Logg, Anders},
+  journal={Siam News},
+  volume={47},
+  number={9},
+  pages={212},
+  year={2014}
+}
+
+@article{AlnaesUFL2014,
+author = {Aln\ae{}s, Martin S. and Logg, Anders and \O{}lgaard, Kristian B. and
+Rognes, Marie E. and Wells, Garth N.},
+title = {Unified form language: A domain-specific language for weak formulations
+of partial differential equations},
+year = {2014},
+issue_date = {February 2014},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {40},
+number = {2},
+issn = {0098-3500},
+url = {https://doi.org/10.1145/2566630},
+doi = {10.1145/2566630},
+abstract = {We present the Unified Form Language (UFL), which is a
+domain-specific language for representing weak formulations of partial
+differential equations with a view to numerical approximation. Features of UFL
+include support for variational forms and functionals, automatic differentiation
+of forms and expressions, arbitrary function space hierarchies for multifield
+problems, general differential operators and flexible tensor algebra. With these
+features, UFL has been used to effortlessly express finite element methods for
+complex systems of partial differential equations in near-mathematical notation,
+resulting in compact, intuitive and readable programs. We present in this work
+the language and its construction. An implementation of UFL is freely available
+as an open-source software library. The library generates abstract syntax tree
+representations of variational problems, which are used by other software
+libraries to generate concrete low-level implementations. Some application
+examples are presented and libraries that support UFL are highlighted.},
+journal = {ACM Trans. Math. Softw.},
+month = mar,
+articleno = {9},
+numpages = {37},
+keywords = {weak formulation, weak form, tensor algebra, symbolic
+differentiation, partial differential equation, mixed element, index notation,
+implicit summation, functional, finite element method, embedded language,
+einstein notation, domain specific language, discretization, automatic
+functional differentiation, algorithmic differentiation, PDE, FEM, DSL, DSEL,
+AD}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@Article{Birn_2001,
+  author    = {Birn, J and Drake, JF and Shay, MA and Rogers, BN and Denton,
+  RE and Hesse, M and Kuznetsova, M and Ma, ZW and Bhattacharjee, A and Otto, A
+and others},
+  journal   = {Journal of Geophysical Research: Space Physics},
+  title     = {Geospace Environmental Modeling (GEM) magnetic reconnection
+challenge},
+  year      = {2001},
+  number    = {A3},
+  pages     = {3715--3719},
+  volume    = {106},
+  publisher = {Wiley Online Library},
+}
+
+@Article{Bard_2026,
+  author   = {C. Bard and J. Dorelli},
+  journal  = {Computer Physics Communications},
+  title    = {High-Performance computational magnetohydrodynamics with Python},
+  year     = {2026},
+  issn     = {0010-4655},
+  pages    = {110077},
+  volume   = {322},
+  abstract = {We present the AGATE simulation code, a Python-based framework
+  developed primarily for solving the magnetohydrodynamics (MHD) equations
+while
+maintaining adaptability to other equation sets. The code employs a modular,
+object-oriented architecture that separates interface specifications from
+numerical implementations, allowing users to customize numerical methods and
+physics models. Built on a Godunov-type finite-volume scheme, AGATE currently
+supports the ideal, Hall, and Chew-Goldberger-Low (CGL) MHD equations, with
+multiple acceleration options ranging from Numpy to GPU-enabled computation via
+NVIDIA CUDA. Performance testing demonstrates that our GPU implementations
+achieve  > 40x speedups over CPU versions. Comprehensive verification through
+established benchmarks confirms accurate reproduction of both linear and
+nonlinear phenomena across different MHD regimes. This combination of
+modularity, performance, and extensibility makes AGATE suitable for multiple
+applications: from rapid prototyping to production simulations, and from
+numerical algorithm development to physics education.},
+  doi      = {https://doi.org/10.1016/j.cpc.2026.110077},
+  keywords = {Python, Magnetohydrodynamics, High-performance computing, PLASMA
+  PHYSICS},
+  url      =
+{https://www.sciencedirect.com/science/article/pii/S0010465526000597},
+}
+
+@incollection {Balbas2009,
+    AUTHOR = {Qian, Xin and Balb\'{a}s, Jorge and Bhattacharjee, Amitava and
+              Yang, Hongang},
+     TITLE = {A numerical study of magnetic reconnection: a central scheme
+              for {H}all {MHD}},
+ BOOKTITLE = {Hyperbolic problems: theory, numerics and applications},
+    SERIES = {Proc. Sympos. Appl. Math.},
+    VOLUME = {67},
+     PAGES = {879--888},
+ PUBLISHER = {Amer. Math. Soc., Providence, RI},
+      YEAR = {2009},
+      ISBN = {978-0-8218-4730-5},
+   MRCLASS = {65M06 (76W05)},
+  MRNUMBER = {2605283},
+}
+
+@article {Balsara2012,
+    AUTHOR = {Balsara, Dinshaw S.},
+     TITLE = {Self-adjusting, positivity preserving high order schemes for
+              hydrodynamics and magnetohydrodynamics},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {231},
+      YEAR = {2012},
+    NUMBER = {22},
+     PAGES = {7504--7517},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {65M08 (37M05 76W05 85A30)},
+  MRNUMBER = {2972845},
+MRREVIEWER = {Robert\ C.\ Tautz},
+}
+
+@article {Balsara2009,
+    AUTHOR = {Balsara, Dinshaw S. and Rumpf, Tobias and Dumbser, Michael and
+              Munz, Claus-Dieter},
+     TITLE = {Efficient, high accuracy {ADER}-{WENO} schemes for
+              hydrodynamics and divergence-free magnetohydrodynamics},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {228},
+      YEAR = {2009},
+    NUMBER = {7},
+     PAGES = {2480--2516},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76M25 (65M06 76W05)},
+  MRNUMBER = {2501694},
+}
+
+@book {Bartels2015,
+    AUTHOR = {Bartels, S\"{o}ren},
+     TITLE = {Numerical methods for nonlinear partial differential
+              equations},
+    SERIES = {Springer Series in Computational Mathematics},
+    VOLUME = {47},
+ PUBLISHER = {Springer, Cham},
+      YEAR = {2015},
+     PAGES = {x+393},
+      ISBN = {978-3-319-13796-4; 978-3-319-13797-1},
+   MRCLASS = {65-01 (35A15 35A35 65Mxx 65Nxx)},
+  MRNUMBER = {3309171},
+MRREVIEWER = {Karsten\ Urban},
+       DOI = {10.1007/978-3-319-13797-1},
+       URL = {https://doi-org.lib-e2.lib.ttu.edu/10.1007/978-3-319-13797-1},
+}
+
+@article {Bianchini2005,
+    AUTHOR = {Bianchini, Stefano and Bressan, Alberto},
+     TITLE = {Vanishing viscosity solutions of nonlinear hyperbolic systems},
+   JOURNAL = {Ann. of Math. (2)},
+  FJOURNAL = {Annals of Mathematics. Second Series},
+    VOLUME = {161},
+      YEAR = {2005},
+    NUMBER = {1},
+     PAGES = {223--342},
+      ISSN = {0003-486X,1939-8980},
+   MRCLASS = {35L65 (35B25 35L45)},
+  MRNUMBER = {2150387},
+MRREVIEWER = {Marta\ Lewicka},
+}
+
+@article {Boffi2010,
+    AUTHOR = {Boffi, Daniele},
+     TITLE = {Finite element approximation of eigenvalue problems},
+   JOURNAL = {Acta Numer.},
+  FJOURNAL = {Acta Numerica},
+    VOLUME = {19},
+      YEAR = {2010},
+     PAGES = {1--120},
+      ISSN = {0962-4929,1474-0508},
+   MRCLASS = {65N30 (65N25)},
+  MRNUMBER = {2652780},
+MRREVIEWER = {Srinivasan\ Kesavan},
+       DOI = {10.1017/S0962492910000012},
+       URL = {https://doi-org.lib-e2.lib.ttu.edu/10.1017/S0962492910000012},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@book {Ciarlet1978,
+    AUTHOR = {Ciarlet, Philippe G.},
+     TITLE = {The finite element method for elliptic problems},
+    SERIES = {Studies in Mathematics and its Applications, Vol. 4},
+ PUBLISHER = {North-Holland Publishing Co., Amsterdam-New York-Oxford},
+      YEAR = {1978},
+     PAGES = {xix+530},
+      ISBN = {0-444-85028-7},
+   MRCLASS = {65N30},
+  MRNUMBER = {520174},
+MRREVIEWER = {Josef\ Nedoma},
+}
+
+@article {Chueh1977,
+    AUTHOR = {Chueh, K. N. and Conley, C. C. and Smoller, J. A.},
+     TITLE = {Positively invariant regions for systems of nonlinear
+              diffusion equations},
+   JOURNAL = {Indiana Univ. Math. J.},
+  FJOURNAL = {Indiana University Mathematics Journal},
+    VOLUME = {26},
+      YEAR = {1977},
+    NUMBER = {2},
+     PAGES = {373--392},
+      ISSN = {0022-2518,1943-5258},
+   MRCLASS = {35K40},
+  MRNUMBER = {430536},
+MRREVIEWER = {Mario\ Primicerio},
+}
+
+@article {Chacon2025,
+    AUTHOR = {Chac\'{o}n, L.},
+     TITLE = {A scalable multidimensional fully implicit solver for {H}all
+              magnetohydrodynamics},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {526},
+      YEAR = {2025},
+     PAGES = {Paper No. 113789, 20},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {65M22 (65F25)},
+  MRNUMBER = {4856550},
+}
+
+@article {Cheng2013,
+    AUTHOR = {Cheng, Yue and Li, Fengyan and Qiu, Jianxian and Xu, Liwei},
+     TITLE = {Positivity-preserving {DG} and central {DG} methods for ideal
+              {MHD} equations},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {238},
+      YEAR = {2013},
+     PAGES = {255--280},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {65M60 (76M10 76W05)},
+  MRNUMBER = {3028356},
+MRREVIEWER = {Carlos\ V\'{a}zquez Cend\'{o}n},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article {Dao2024,
+    AUTHOR = {Dao, Tuan Anh and Nazarov, Murtazo and Tomas, Ignacio},
+     TITLE = {A structure preserving numerical method for the ideal
+              compressible {MHD} system},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {508},
+      YEAR = {2024},
+     PAGES = {Paper No. 113009, 25},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76N10 (65M60 76W05)},
+  MRNUMBER = {4734518},
+MRREVIEWER = {Fan\ Zhang},
+}
+
+@article {Derigs2018,
+    AUTHOR = {Derigs, Dominik and Winters, Andrew R. and Gassner, Gregor J.
+              and Walch, Stefanie and Bohm, Marvin},
+     TITLE = {Ideal {GLM}-{MHD}: about the entropy consistent nine-wave
+              magnetic field divergence diminishing ideal
+              magnetohydrodynamics equations},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {364},
+      YEAR = {2018},
+     PAGES = {420--467},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76W05},
+  MRNUMBER = {3787436},
+}
+
+@article {Dedner2002,
+    AUTHOR = {Dedner, A. and Kemm, F. and Kr\"{o}ner, D. and Munz, C.-D. and
+              Schnitzer, T. and Wesenberg, M.},
+     TITLE = {Hyperbolic divergence cleaning for the {MHD} equations},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {175},
+      YEAR = {2002},
+    NUMBER = {2},
+     PAGES = {645--673},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76W05 (65M60 76M12)},
+  MRNUMBER = {1880121},
+}
+
+@Article{Daldorff_2014,
+  author   = {Daldorff, Lars K. S. and T\'oth, G\'abor and Gombosi,
+  Tamas I. and Lapenta, Giovanni and Amaya, Jorge and Markidis, Stefano and
+Brackbill, Jeremiah U.},
+  title    = {Two-way coupling of a global {H}all magnetohydrodynamics model
+  with a local implicit particle-in-cell model},
+  doi      = {10.1016/j.jcp.2014.03.009},
+  issn     = {0021-9991,1090-2716},
+  pages    = {236--254},
+  url      = {https://doi.org/10.1016/j.jcp.2014.03.009},
+  volume   = {268},
+  fjournal = {Journal of Computational Physics},
+  journal  = {J. Comput. Phys.},
+  mrclass  = {82D10},
+  mrnumber = {3192442},
+  year     = {2014},
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@Article{Foldes_2023,
+  author    = {Foldes, Raffaello and L{\'e}v{\^e}que, Emmanuel and Marino,
+  Raffaele and Pietropaolo, Ermanno and De Rosis, Alessandro and Telloni,
+Daniele and Feraco, Fabio},
+  journal   = {Journal of Plasma Physics},
+  title     = {Efficient kinetic Lattice Boltzmann simulation of
+three-dimensional Hall-MHD turbulence},
+  year      = {2023},
+  number    = {4},
+  pages     = {905890413},
+  volume    = {89},
+  publisher = {Cambridge University Press},
+}
+
+@article{Freidberg1982,
+  title = {Ideal magnetohydrodynamic theory of magnetic fusion systems},
+  author = {Freidberg, J. P.},
+  journal = {Rev. Mod. Phys.},
+  volume = {54},
+  issue = {3},
+  pages = {801--902},
+  numpages = {0},
+  year = {1982},
+  month = {Jul},
+  publisher = {American Physical Society},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@book{Goed2004,
+  title={Principles of magnetohydrodynamics: with applications to laboratory and
+astrophysical plasmas},
+  author={Goedbloed, JP Hans and Poedts, Stefaan},
+  year={2004},
+  publisher={Cambridge university press}
+}
+
+
+@Article{Guillet_2019,
+  author    = {Guillet, Thomas and Pakmor, R{\"u}diger and Springel, Volker
+  and Chandrashekar, Praveen and Klingenberg, Christian},
+  journal   = {Monthly Notices of the Royal Astronomical Society},
+  title     = {High-order magnetohydrodynamics for astrophysics with an
+  adaptive mesh refinement discontinuous Galerkin scheme},
+  year      = {2019},
+  number    = {3},
+  pages     = {4209--4246},
+  volume    = {485},
+  publisher = {Oxford University Press},
+}
+
+@book {Godlewski1996,
+    AUTHOR = {Godlewski, Edwige and Raviart, Pierre-Arnaud},
+     TITLE = {Numerical approximation of hyperbolic systems of conservation
+              laws},
+    SERIES = {Applied Mathematical Sciences},
+    VOLUME = {118},
+ PUBLISHER = {Springer-Verlag, New York},
+      YEAR = {1996},
+     PAGES = {viii+509},
+      ISBN = {0-387-94529-6},
+   MRCLASS = {65M06 (35A35 35L65 65-02 76-02 76Mxx 76N10)},
+  MRNUMBER = {1410987},
+MRREVIEWER = {Rolf\ Jeltsch},
+       DOI = {10.1007/978-1-4612-0713-9},
+       URL = {https://doi-org.lib-e2.lib.ttu.edu/10.1007/978-1-4612-0713-9},
+}
+
+
+@article {Guermond2014,
+    AUTHOR = {Guermond, Jean-Luc and Popov, Bojan},
+     TITLE = {Viscous regularization of the {E}uler equations and entropy
+              principles},
+   JOURNAL = {SIAM J. Appl. Math.},
+  FJOURNAL = {SIAM Journal on Applied Mathematics},
+    VOLUME = {74},
+      YEAR = {2014},
+    NUMBER = {2},
+     PAGES = {284--305},
+      ISSN = {0036-1399,1095-712X},
+   MRCLASS = {35Q31 (35D40 35L65 76N10)},
+  MRNUMBER = {3176331},
+MRREVIEWER = {Huimin\ Yu},
+}
+
+@book {ErnGuermond2021,
+    AUTHOR = {Ern, Alexandre and Guermond, Jean-Luc},
+     TITLE = {Finite elements {I}---{A}pproximation and interpolation},
+    SERIES = {Texts in Applied Mathematics},
+    VOLUME = {72},
+ PUBLISHER = {Springer, Cham},
+      YEAR = {[2021] \copyright 2021},
+     PAGES = {xii+325},
+      ISBN = {978-3-030-56340-0; 978-3-030-56341-7},
+   MRCLASS = {65-01},
+  MRNUMBER = {4242224},
+       DOI = {10.1007/978-3-030-56341-7},
+       URL = {https://doi-org.lib-e2.lib.ttu.edu/10.1007/978-3-030-56341-7},
+}
+
+@book {ErnGuermond2021III,
+    AUTHOR = {Ern, Alexandre and Guermond, Jean-Luc},
+     TITLE = {Finite elements {III}---first-order and time-dependent {PDE}s},
+    SERIES = {Texts in Applied Mathematics},
+    VOLUME = {74},
+ PUBLISHER = {Springer, Cham},
+      YEAR = {[2021] \copyright 2021},
+     PAGES = {viii+417},
+      ISBN = {978-3-030-57347-8; 978-3-030-57348-5},
+   MRCLASS = {65-01},
+  MRNUMBER = {4248810},
+       DOI = {10.1007/978-3-030-57348-5},
+       URL = {https://doi-org.lib-e2.lib.ttu.edu/10.1007/978-3-030-57348-5},
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article {Hoff1985,
+    AUTHOR = {Hoff, David},
+     TITLE = {Invariant regions for systems of conservation laws},
+   JOURNAL = {Trans. Amer. Math. Soc.},
+  FJOURNAL = {Transactions of the American Mathematical Society},
+    VOLUME = {289},
+      YEAR = {1985},
+    NUMBER = {2},
+     PAGES = {591--610},
+      ISSN = {0002-9947,1088-6850},
+   MRCLASS = {35L65 (65M05)},
+  MRNUMBER = {784005},
+MRREVIEWER = {Tai\ Ping\ Liu},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@incollection {Jardin2013,
+    AUTHOR = {Jardin, Stephen C.},
+     TITLE = {M{HD} simulations for fusion applications},
+ BOOKTITLE = {Numerical models for fusion},
+    SERIES = {Panor. Synth\`eses},
+    VOLUME = {39/40},
+     PAGES = {177--235},
+ PUBLISHER = {Soc. Math. France, Paris},
+      YEAR = {2013},
+   MRCLASS = {76W05 (82D75)},
+  MRNUMBER = {3220426},
+MRREVIEWER = {Mark Thompson},
+}
+
+@article{Jorek2021,
+year = {2021},
+month = {may},
+publisher = {IOP Publishing},
+volume = {61},
+number = {6},
+pages = {065001},
+author = {M. Hoelzl and G.T.A. Huijsmans and S.J.P. Pamela and M. Bécoulet and
+E. Nardon and F.J. Artola and B. Nkonga and C.V. Atanasiu and V. Bandaru and A.
+Bhole and D. Bonfiglio and A. Cathey and O. Czarny and A. Dvornova and T. Fehér
+and A. Fil and E. Franck and S. Futatani and M. Gruca and H. Guillard and J.W.
+Haverkort and I. Holod and D. Hu and S.K. Kim and S.Q. Korving and L. Kos and I.
+Krebs and L. Kripner and G. Latu and F. Liu and P. Merkel and D. Meshcheriakov
+and V. Mitterauer and S. Mochalskyy and J.A. Morales and R. Nies and N. Nikulsin
+and F. Orain and J. Pratt and R. Ramasamy and P. Ramet and C. Reux and K.
+Särkimäki and N. Schwarz and P. Singh Verma and S.F. Smith and C. Sommariva and
+E. Strumberger and D.C. van Vugt and M. Verbeek and E. Westerhof and F.
+Wieschollek and J. Zielinski},
+title = {The {JOREK} non-linear extended {MHD} code and applications to
+large-scale
+instabilities and their control in magnetically confined fusion plasmas},
+journal = {Nuclear Fusion},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Krall1974,
+  title={Principles of plasma physics},
+  author={Krall, Nicholas A and Trivelpiece, Alvin W and Symon, KR},
+  journal={IEEE Transactions on Plasma Science},
+  volume={2},
+  number={3},
+  pages={196--196},
+  year={1974},
+  publisher={IEEE}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article {Lax1957,
+    AUTHOR = {Lax, P. D.},
+     TITLE = {Hyperbolic systems of conservation laws. {II}},
+   JOURNAL = {Comm. Pure Appl. Math.},
+  FJOURNAL = {Communications on Pure and Applied Mathematics},
+    VOLUME = {10},
+      YEAR = {1957},
+     PAGES = {537--566},
+      ISSN = {0010-3640,1097-0312},
+   MRCLASS = {35.00},
+  MRNUMBER = {93653},
+MRREVIEWER = {M.\ A.\ Hyman},
+}
+
+@article {Li2005,
+    AUTHOR = {Li, Fengyan and Shu, Chi-Wang},
+     TITLE = {Locally divergence-free discontinuous {G}alerkin methods for
+              {MHD} equations},
+   JOURNAL = {J. Sci. Comput.},
+  FJOURNAL = {Journal of Scientific Computing},
+    VOLUME = {22/23},
+      YEAR = {2005},
+     PAGES = {413--442},
+      ISSN = {0885-7474,1573-7691},
+   MRCLASS = {65M60 (76M10 76W05)},
+  MRNUMBER = {2142204},
+MRREVIEWER = {Gerd\ Rapin},
+}
+
+@article {Lighthill1960,
+    AUTHOR = {Lighthill, M. J.},
+     TITLE = {Studies on magneto-hydrodynamic waves and other anisotropic
+              wave motions},
+   JOURNAL = {Philos. Trans. Roy. Soc. London Ser. A},
+  FJOURNAL = {Philosophical Transactions of the Royal Society of London.
+              Series A. Mathematical and Physical Sciences},
+    VOLUME = {252},
+      YEAR = {1960},
+     PAGES = {397--430},
+      ISSN = {0080-4614},
+   MRCLASS = {76.42},
+  MRNUMBER = {148337},
+MRREVIEWER = {P.\ H.\ Roberts},
+}
+
+@article {Londrillo2004,
+    AUTHOR = {Londrillo, P. and Del Zanna, L.},
+     TITLE = {On the divergence-free condition in {G}odunov-type schemes for
+              ideal magnetohydrodynamics: the upwind constrained transport
+              method},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {195},
+      YEAR = {2004},
+    NUMBER = {1},
+     PAGES = {17--48},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76M20 (65M06 76W05)},
+  MRNUMBER = {2043130},
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@techreport{mcdaniel2006,
+  title={Limitations of Laboratory Pulsed Power systems for Multi-Megagauss
+Field Generation.},
+  author={McDaniel, Dillon H and Spielman, Richard B and Chantrenne, Sophie J},
+  year={2006},
+  institution={Sandia National Laboratories (SNL-NM), Albuquerque, NM (United
+States)}
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@Article{Orszag_1979,
+  author            = {Orszag, Steven A. and Tang, Cha-Mei},
+  journal           = {Journal of Fluid Mechanics},
+  title             = {Small-scale structure of two-dimensional
+magnetohydrodynamic turbulence},
+  year              = {1979},
+  note              = {Cited by: 471},
+  number            = {1},
+  pages             = {129 – 143},
+  volume            = {90},
+  doi               = {10.1017/S002211207900210X},
+  publication_stage = {Final},
+  source            = {Scopus},
+  type              = {Article},
+  url               =
+{https://www.scopus.com/inward/record.uri?eid=2-s2.0-0018286867&doi=10.1017%
+2fS002211207900210X&partnerID=40&md5=a35af88d9db69a1dcfe5c4f92d6351d4},
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@Article{Parashar_2009,
+  author    = {Parashar, TN and Shay, MA and Cassak, PA and Matthaeus, WH},
+  journal   = {Physics of Plasmas},
+  title     = {Kinetic dissipation and anisotropic heating in a turbulent
+collisionless plasma},
+  year      = {2009},
+  number    = {3},
+  volume    = {16},
+  publisher = {AIP Publishing},
+}
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@article{Rosen2000,
+  title={MHD modeling of conductors at ultrahigh current density},
+  author={Rosenthal, Stephen E and Desjarlais, Michael P and Spielman, Rick
+Bernard and Stygar, WILLIAM A and Asay, JAMES R and Douglas, Melissa R and Hall,
+CA and Frese, MH and Morse, RL and Reisman, DB},
+  journal={IEEE Transactions on Plasma Science},
+  volume={28},
+  number={5},
+  pages={1427--1433},
+  year={2000},
+  publisher={IEEE}
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@article{Seyler2018,
+  title={Helical instability in MagLIF due to axial flux compression by
+low-density plasma},
+  author={Seyler, CE and Martin, Matthew R and Hamlin, ND},
+  journal={Physics of Plasmas},
+  volume={25},
+  number={6},
+  year={2018},
+  publisher={AIP Publishing}
+}
+
+@article {Shadid2019,
+    AUTHOR = {Miller, S. T. and Cyr, E. C. and Shadid, J. N. and Kramer, R.
+              M. J. and Phillips, E. G. and Conde, S. and Pawlowski, R. P.},
+     TITLE = {I{MEX} and exact sequence discretization of the multi-fluid
+              plasma model},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {397},
+      YEAR = {2019},
+     PAGES = {108806, 22},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {65M60 (65L06 65M20 76X05)},
+  MRNUMBER = {3991926},
+}
+
+@Article{Stawarz_2015,
+  author    = {Stawarz, Julia E and Pouquet, Annick},
+  journal   = {Physical Review E},
+  title     = {Small-scale behavior of Hall magnetohydrodynamic turbulence},
+  year      = {2015},
+  number    = {6},
+  pages     = {063102},
+  volume    = {92},
+  publisher = {APS},
+}
+
+
+@book {Sitenko1995,
+    AUTHOR = {Sitenko, A. and Malnev, V.},
+     TITLE = {Plasma physics theory},
+    SERIES = {Applied Mathematics and Mathematical Computation},
+    VOLUME = {10},
+ PUBLISHER = {Chapman \& Hall, London},
+      YEAR = {1995},
+     PAGES = {xviii+403},
+      ISBN = {0-412-56790-3},
+   MRCLASS = {82D10 (76E25 76W05 76X05 82-01)},
+  MRNUMBER = {1368631},
+MRREVIEWER = {Magdi M. Shoucri},
+}
+
+@article {Strumik2017,
+    AUTHOR = {Strumik, Marek and Stasiewicz, Krzysztof},
+     TITLE = {Multidimensional {H}all magnetohydrodynamics with isotropic or
+              anisotropic thermal pressure: numerical scheme and its
+              validation using solitary waves},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {330},
+      YEAR = {2017},
+     PAGES = {846--862},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {65M06 (76M20 76W05 76X05)},
+  MRNUMBER = {3581495},
+}
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@article {Tadmor1986,
+    AUTHOR = {Tadmor, Eitan},
+     TITLE = {A minimum entropy principle in the gas dynamics equations},
+   JOURNAL = {Appl. Numer. Math.},
+  FJOURNAL = {Applied Numerical Mathematics. An IMACS Journal},
+    VOLUME = {2},
+      YEAR = {1986},
+    NUMBER = {3-5},
+     PAGES = {211--219},
+      ISSN = {0168-9274,1873-5460},
+   MRCLASS = {76N15 (35L65)},
+  MRNUMBER = {863987},
+MRREVIEWER = {Alberto\ Valli},
+       DOI = {10.1016/0168-9274(86)90029-2},
+       URL = {https://doi-org.lib-e2.lib.ttu.edu/10.1016/0168-9274(86)90029-2},
+}
+
+@article {Toth2008,
+    AUTHOR = {T\'{o}th, G\'{a}bor and Ma, Yingjuan and Gombosi, Tamas I.},
+     TITLE = {Hall magnetohydrodynamics on block-adaptive grids},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {227},
+      YEAR = {2008},
+    NUMBER = {14},
+     PAGES = {6967--6984},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76W05 (76M25)},
+  MRNUMBER = {2435438},
+}
+
+@article {Toth2014,
+    AUTHOR = {Daldorff, Lars K. S. and T\'{o}th, G\'{a}bor and Gombosi,
+              Tamas I. and Lapenta, Giovanni and Amaya, Jorge and Markidis,
+              Stefano and Brackbill, Jeremiah U.},
+     TITLE = {Two-way coupling of a global {H}all magnetohydrodynamics model
+              with a local implicit particle-in-cell model},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {268},
+      YEAR = {2014},
+     PAGES = {236--254},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {82D10},
+  MRNUMBER = {3192442},
+}
+
+@article {Torr2003,
+    AUTHOR = {Torrilhon, M.},
+     TITLE = {Non-uniform convergence of finite volume schemes for {R}iemann
+              problems of ideal magnetohydrodynamics},
+   JOURNAL = {J. Comput. Phys.},
+  FJOURNAL = {Journal of Computational Physics},
+    VOLUME = {192},
+      YEAR = {2003},
+    NUMBER = {1},
+     PAGES = {73--94},
+      ISSN = {0021-9991,1090-2716},
+   MRCLASS = {76M12 (65M06 65M12 76W05)},
+  MRNUMBER = {2045705},
+}
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+& WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWw
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+@book {Wilmanski2015,
+    AUTHOR = {Albers, Bettina and Wilmanski, Krzysztof},
+     TITLE = {Continuum thermodynamics. {P}art {II}. {A}pplications and
+              examples},
+    SERIES = {Series on Advances in Mathematics for Applied Sciences},
+    VOLUME = {85},
+ PUBLISHER = {World Scientific Publishing Co. Pte. Ltd., Hackensack, NJ},
+      YEAR = {2015},
+     PAGES = {xiv+464},
+      ISBN = {978-981-4412-37-7},
+   MRCLASS = {74-02 (74A15 74F05 74F10 80A10)},
+  MRNUMBER = {3288351},
+}
+
+@article {Wu2018,
+    AUTHOR = {Wu, Kailiang},
+     TITLE = {Positivity-preserving analysis of numerical schemes for ideal
+              magnetohydrodynamics},
+   JOURNAL = {SIAM J. Numer. Anal.},
+  FJOURNAL = {SIAM Journal on Numerical Analysis},
+    VOLUME = {56},
+      YEAR = {2018},
+    NUMBER = {4},
+     PAGES = {2124--2147},
+      ISSN = {0036-1429,1095-7170},
+   MRCLASS = {65M60 (35L65 65M08 65M12 76W05)},
+  MRNUMBER = {3828858},
+MRREVIEWER = {Eihab\ B. M. Bashier},
+}
+
+@article {Wu2018II,
+    AUTHOR = {Wu, Kailiang and Shu, Chi-Wang},
+     TITLE = {A provably positive discontinuous {G}alerkin method for
+              multidimensional ideal magnetohydrodynamics},
+   JOURNAL = {SIAM J. Sci. Comput.},
+  FJOURNAL = {SIAM Journal on Scientific Computing},
+    VOLUME = {40},
+      YEAR = {2018},
+    NUMBER = {5},
+     PAGES = {B1302--B1329},
+      ISSN = {1064-8275,1095-7197},
+   MRCLASS = {65M60 (35L65 35Q35 76M10 76W05)},
+  MRNUMBER = {3862291},
+MRREVIEWER = {Hidekazu\ Yoshioka},
+}
+
+
+
+
+
+
