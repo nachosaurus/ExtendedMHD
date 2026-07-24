@@ -875,7 +875,70 @@ analysis of the Jacobian.
 
 \section{Non-dimensional analysis of the extended MHD system}
 
-\section{Newton solver and jacobian analysis}
+Consider the induction equation
+\begin{align*}
+    \mu \partial_t \Hfield
++ \curl{}\!\left(d_e^2 \tfrac{1}{\rho} \tfrac{\partial}{\partial t}\curl{}\Hfield\right)
+&= \curl{}\!\left(\mu \vel \times \Hfield
+- \tfrac{\mu d_i}{\rho} \curl{}\Hfield \times \Hfield
+- \tfrac{1}{\conduct} \curl{}\Hfield\right),
+\end{align*}
+and the following change of variables
+\begin{align*}
+    \Tilde{\xcoord} = \frac{\xcoord}{L_0}, \qquad \Tilde{\vel}=\frac{\vel}{v_A}, \qquad \Tilde{\Hfield}=\frac{\Hfield}{\Hfieldcomponent_0}, \qquad \Tilde{\rho}=\frac{\rho}{\rho_0},
+\end{align*}
+where $v_A$ is the Alfv\'en velocity $v_A:=\Hfieldcomponent_0\sqrt{\mu/\rho_0}$ and $L_0$, $\Hfieldcomponent_0$ and $\rho_0$ are characteristic length, magnetic field strength and density, respectively. In terms of the rescaled variables, the differential operators satisfy
+\begin{align*}
+    \curl{} = \frac{1}{L_0}\widetilde{\curl{}}, \qquad \frac{\partial}{\partial t}=\frac{v_A}{L_0}\frac{\partial}{\partial \Tilde{t}}.
+\end{align*}
+Substituting these into the induction equation and dividing through by $\mu \Hfieldcomponent_0 v_A / L_0$ yields the non-dimensionalized equation
+\begin{align*}
+    \Tilde{\partial_t}\,\Tilde{\Hfield}
++ \alpha\,\widetilde{\curl{}}\!\left(
+    \frac{1}{\Tilde{\rho}}
+    \Tilde{\partial_t}\,
+    \widetilde{\curl{}}\Tilde{\Hfield}
+\right)
+&=
+\widetilde{\curl{}}\!\left(
+    \Tilde{\vel}\times\Tilde{\Hfield}
+\right)
+-
+\beta\,\widetilde{\curl{}}\!\left(
+    \frac{1}{\Tilde{\rho}}
+    \widetilde{\curl{}}\Tilde{\Hfield}
+    \times
+    \Tilde{\Hfield}
+\right)
+-
+S^{-1}\,\widetilde{\curl{}}\!\left(
+    \widetilde{\curl{}}\Tilde{\Hfield}
+\right),
+\end{align*}
+where $S:=\mu\conduct L_0 v_A$ is the Lundquist number and the non-dimensional constants are
+\begin{align*}
+    \alpha = \frac{d_e^2}{L_0^2\rho_0\mu}, \qquad \beta = \frac{d_i\Hfieldcomponent_0}{L_0\rho_0 v_A}.
+\end{align*}
+Using the definitions of $d_i$ and $v_A$, we can write $\beta$ as
+\begin{align*}
+    \beta = \frac{1}{L_0}\left(\frac{m_e}{|q_e|}+\frac{m_i}{q_i}\right)\frac{1}{\sqrt{\rho_0\mu}}
+    \approx\frac{1}{L_0}\frac{m_i}{q_i}\frac{1}{\sqrt{\rho_0\mu}}
+    =\frac{\delta_i}{L_0}.
+\end{align*}
+Here we have used that $d_i\approx m_i/q_i$, and identified the ion skin depth $\delta_i:=\frac{m_i}{q_i\sqrt{\rho_0\mu}}$. The strength of the Hall term is therefore set by the ratio of the characteristic length to the ion skin depth. For numerical simulations of Hall MHD, it is common to choose $L_0=\delta_i$, so that $\beta = 1$.
+
+We can also write $\alpha$ in terms of the ion skin depth. Substituting the definition of $d_e^2$ and multiplying and dividing by $m_i |q_e| / (q_i m_e)$:
+\begin{align*}
+    \alpha = \frac{1}{L_0^2}\frac{m_em_i}{\rho_0\mu |q_e| q_i}
+    = \frac{1}{L_0^2}\underbrace{\frac{m_i^2}{\rho_0\mu q_i^2}}_{\delta_i^2}\,\frac{q_i m_e}{|q_e| m_i}
+    = \frac{\delta_i^2}{L_0^2}\,\frac{q_i m_e}{|q_e| m_i}
+    = \beta^2\,\frac{q_i m_e}{|q_e| m_i}.
+\end{align*}
+Hence the electron-inertia term is suppressed relative to the square of the Hall term strength by the electron-to-ion mass and charge ratio. For a hydrogen plasma, $q_i = |q_e|$ and $m_i/m_e \approx 1836$. If the characteristic length is chosen to be $L_0=\delta_i$, then $\beta = 1$ and $\alpha \approx 1/1836$.
+
+
+
+\section{Newton solver and Jacobian analysis}
 
 
 
