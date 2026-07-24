@@ -932,9 +932,11 @@ We can also write $\alpha$ in terms of the ion skin depth. Substituting the defi
     \alpha = \frac{1}{L_0^2}\frac{m_em_i}{\rho_0\mu |q_e| q_i}
     = \frac{1}{L_0^2}\underbrace{\frac{m_i^2}{\rho_0\mu q_i^2}}_{\delta_i^2}\,\frac{q_i m_e}{|q_e| m_i}
     = \frac{\delta_i^2}{L_0^2}\,\frac{q_i m_e}{|q_e| m_i}
-    = \beta^2\,\frac{q_i m_e}{|q_e| m_i}.
+    = \beta^2\,\frac{m_e}{Z m_i},
 \end{align*}
-Hence the electron-inertia term is suppressed relative to the square of the Hall term strength by the electron-to-ion mass and charge ratio. For a hydrogen plasma, $q_i = |q_e|$ and $m_i/m_e \approx 1836$. If the characteristic length is chosen to be $L_0=\delta_i$, then $\beta = 1$ and $\alpha \approx 1/1836$.
+where $Z$ denotes the number of ion carriers. Hence the electron-inertia term is suppressed relative to the square of the Hall term strength by the electron-to-ion mass and charge ratio. For a hydrogen plasma, $Z=1$ and $m_i/m_e \approx 1836$. If the characteristic length is chosen to be $L_0=\delta_i$, then $\beta = 1$ and $\alpha \approx 1/1836$.
+
+\rf{This seems to suggest that the electron inertia term effects are only resolved if the mesh spacing is smaller than the electron skin depth (very small!!)}
 
 
 
